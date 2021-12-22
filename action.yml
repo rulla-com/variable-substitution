@@ -3,7 +3,10 @@ name: 'Variable Substitution'
 description: 'Apply Variable substitution in XML,JSON or YAML files. Github.com/Azure/Actions'
 inputs: 
   files:
-    description: 'comma separated list of XML/JSON/YAML files in which tokens are to be substituted. Files names must be specified relative to the folder-path.'
+    description: 'newline separated list of XML/JSON/YAML files in which tokens are to be substituted. Files names must be specified relative to the folder-path.'
+    required: true
+  format:
+    description: 'json, xml or yaml'
     required: true
 runs:
   using: 'node12'
