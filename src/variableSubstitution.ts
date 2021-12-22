@@ -12,17 +12,17 @@ import fileEncoding = require('./operations/fileEncodingUtility');
 
 export class VariableSubstitution {
     async run() {
-        let filesInput = core.getInput("files", { required: true });
-        let files = filesInput.split(",");
-        if(files.length > 0){
-            this.segregateFilesAndSubstitute(files);
+        let files = core.getInput("files", { required: true }).split('\n');
+        let format = core.getInput("format", { required: true });
+        if (files.length > 0){
+            this.segregateFilesAndSubstitute(files, format);
         }
         else {
             throw Error('File Tranformation is not enabled. Please provide JSON/XML or YAML target files for variable substitution.');
         }
     }
     
-    segregateFilesAndSubstitute(files: string[]) {
+    segregateFilesAndSubstitute(files: string[], format: string) {
         let isSubstitutionApplied: boolean = false;
         for(let file of files){
             let matchedFiles = findfiles(file.trim());
@@ -37,7 +37,7 @@ export class VariableSubstitution {
                 if(fileEncodeType.withBOM) {
                     fileContent = fileContent.slice(1);
                 }
-                if(this.isJson(file, fileContent)) {
+                if(format === 'json' && this.isJson(file, fileContent)) {
                     console.log("Applying variable substitution on JSON file: " + file);
                     let jsonSubsitution =  new JsonSubstitution();
                     let jsonObject = this.fileContentCache.get(file);
@@ -51,7 +51,7 @@ export class VariableSubstitution {
                     }
                     isSubstitutionApplied = isJsonSubstitutionApplied || isSubstitutionApplied;
                 }
-                else if(this.isXml(file, fileContent)) {
+                else if(format === 'xml' && this.isXml(file, fileContent)) {
                     console.log("Applying variable substitution on XML file: " + file);   
                     let xmlDomUtilityInstance: XmlDomUtility = this.fileContentCache.get(file);
                     let xmlSubstitution = new XmlSubstitution(xmlDomUtilityInstance);
@@ -72,7 +72,7 @@ export class VariableSubstitution {
                     }
                     isSubstitutionApplied = isXmlSubstitutionApplied || isSubstitutionApplied;
                 }                
-                else if(this.isYaml(file, fileContent)) {
+                else if(format === 'yaml' && this.isYaml(file, fileContent)) {
                     console.log("Applying variable substitution on YAML file: " + file);
                     let jsonSubsitution =  new JsonSubstitution();
                     let yamlObject = this.fileContentCache.get(file);
