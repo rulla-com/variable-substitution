@@ -25,7 +25,7 @@ describe("Test variable substitution main", () => {
         let filesArr = file.split(",");
         let varSub = new VariableSubstitution();
         try {
-            varSub.segregateFilesAndSubstitute(filesArr);
+            varSub.segregateFilesAndSubstitute(filesArr, 'xml');
         }
         catch(e) {
         }
@@ -37,7 +37,7 @@ describe("Test variable substitution main", () => {
         let filesArr = file.split(",");
         let varSub = new VariableSubstitution();
         try {
-            varSub.segregateFilesAndSubstitute(filesArr);
+            varSub.segregateFilesAndSubstitute(filesArr, 'json');
         }
         catch(e) {
         }
@@ -49,7 +49,7 @@ describe("Test variable substitution main", () => {
         let filesArr = file.split(",");
         let varSub = new VariableSubstitution();
         try {
-            varSub.segregateFilesAndSubstitute(filesArr);
+            varSub.segregateFilesAndSubstitute(filesArr, 'json');
         }
         catch(e) {
         }
@@ -61,7 +61,7 @@ describe("Test variable substitution main", () => {
         let filesArr = file.split(",");
         let varSub = new VariableSubstitution();
         try {
-            varSub.segregateFilesAndSubstitute(filesArr);
+            varSub.segregateFilesAndSubstitute(filesArr, 'yaml');
         }
         catch(e) {
         }
@@ -73,7 +73,7 @@ describe("Test variable substitution main", () => {
         let filesArr = file.split(",");
         let varSub = new VariableSubstitution();
         try {
-            varSub.segregateFilesAndSubstitute(filesArr);
+            varSub.segregateFilesAndSubstitute(filesArr, 'yaml');
         }
         catch(e) {
         }
