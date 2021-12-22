@@ -13,7 +13,6 @@ import fileEncoding = require('./operations/fileEncodingUtility');
 export class VariableSubstitution {
     async run() {
         let fileInput = core.getInput("files", { required: true });
-        core.info(fileInput);
         let files = fileInput.split('\n');
         core.info(`${files.length} files found`);
         let format = core.getInput("format", { required: true });
